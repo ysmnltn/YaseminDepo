@@ -108,6 +108,9 @@ namespace EmployeeManagment.Data.Migrations
                     b.Property<int>("DefaultDays")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 

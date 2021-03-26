@@ -1,0 +1,57 @@
+﻿@model EmployeeManagment.Common.VModels.EmployeeLeaveTypeVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Yeni İzin Takibi Ekle
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" asp-for="Name"> İzin Tipi </label>
+
+                <div class="col-sm-9">
+                    <input asp-for="Name" type="text" id="form-field-1" placeholder="İzin Tipi" class="col-xs-10 col-sm-5" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" asp-for="DefaultDays"> Gün Sayısı </label>
+
+                <div class="col-sm-9">
+                    <input asp-for="DefaultDays" type="number" id="form-field-1" placeholder="Gün Sayısı" class="col-xs-10 col-sm-5" />
+                    <span asp-validation-for="DefaultDays"></span>
+                </div>
+            </div>
+
+
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <input type="submit" class="btn btn-info" value="Ekle" />
+
+
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}

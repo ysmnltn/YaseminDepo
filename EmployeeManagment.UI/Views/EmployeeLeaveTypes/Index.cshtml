@@ -1,0 +1,131 @@
+﻿@model IEnumerable<EmployeeManagment.Common.VModels.EmployeeLeaveTypeVM>
+
+
+@{
+    ViewData["Title"] = "EmployeeTypesListView";
+}
+
+
+<div class="page-header">
+    <h1>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Çalışan İzin Takip Listesi
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+
+<div class="col-6 text-left text-white">
+    <a class="btn btn-success" asp-controller="EmployeeLeaveTypes" asp-action="Create">
+        <i class="fa fa-plus-circle mr-2"></i>
+        Yeni Ekle
+    </a>
+</div>
+
+
+<br />
+
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="row">
+            <div class="col-xs-12">
+                <table id="simple-table" class="table  table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Liste İsmi</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.DateCreated</td>
+
+                                <td>
+                                    <div class="hidden-sm hidden-xs btn-group">
+                                        <a asp-controller="EmployeeLeaveTypes" asp-action="Edit" class="btn btn-xs btn-info" asp-route-id="@item.Id">
+                                            <i class="ace-icon fa fa-pencil bigger-120 mr-2"></i>
+                                        </a>
+
+                                        <a class="btn btn-xs btn-danger" id="buttonRemove" data-id="@item.Id" onclick="Remove(@item.Id)">
+                                            <i class="ace-icon fa fa-trash bigger-120 mr-2"></i>
+                                        </a>
+
+                                        <button class="btn btn-xs btn-warning">
+                                            <i class="ace-icon fa fa-flag bigger-120"></i>
+                                        </button>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div><!-- /.span -->
+        </div><!-- /.row -->
+
+        <div class="hr hr-18 dotted hr-double"></div>
+
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+
+@section Scripts {
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //$('#buttonRemove').on("click", function () {
+
+        //    var id = parseInt((this).attr("data-id"));
+        //    alert(id);
+
+
+        //});
+
+
+
+    });
+
+    function Remove(leaveTypeId) {
+        var id = parseInt(leaveTypeId);
+
+        swal({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Silinen veriler geri alınamaz!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+
+            if (willDelete) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/EmployeeLeaveTypes/Delete/' + id,
+                    success: function (result) {
+                        if (result.success) {
+                            toastr.success(result.message);
+                        }
+                        else {
+                            toastr.error(result.message);
+                        }
+                    }
+
+                });
+            }
+        })
+
+    }
+
+</script>
+
+}
